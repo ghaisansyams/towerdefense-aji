@@ -696,3 +696,18 @@ export const DAMAGE_TEXT = {
     poison: '#b6ff5c',
   } as Record<string, string>,
 } as const;
+
+// ---------------------------------------------------------- particles
+/**
+ * Pool sizes are hard caps: bursts are dropped rather than growing the pool,
+ * so particles can never be the thing that costs a frame. These are the first
+ * numbers to turn down if the framerate slips.
+ */
+export const PARTICLES = {
+  maxSparks: 110,
+  maxCubes: 140,
+  /** small burst where a projectile lands */
+  spark: { count: 5, speed: 3.4, life: 0.3, size: 0.075, gravity: -2.2, drag: 1.2 },
+  /** scattering cubes when an enemy dies */
+  death: { count: 7, speed: 2.5, life: 0.55, size: 0.115, gravity: -5.5, drag: 1.5 },
+} as const;
