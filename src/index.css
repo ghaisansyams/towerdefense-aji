@@ -383,3 +383,74 @@ canvas {
 .restart:hover {
   background: rgba(255, 255, 255, 0.18);
 }
+
+/* --- upgrade UI */
+.level-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.level-pips {
+  display: flex;
+  gap: 3px;
+}
+
+.pip {
+  width: 16px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.pip.on {
+  background: #ffd24a;
+}
+
+.level-text {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8fa3b0;
+}
+
+.delta {
+  color: #6ee787;
+  font-weight: 650;
+}
+
+.upgrade {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 7px;
+  border: 1px solid rgba(110, 231, 135, 0.45);
+  background: rgba(70, 217, 93, 0.16);
+  color: #8ff0a4;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+
+.upgrade:hover:not(:disabled) {
+  background: rgba(70, 217, 93, 0.28);
+}
+
+.upgrade:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  color: #8fa3b0;
+}
+
+.invested {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #7e91a0;
+}
