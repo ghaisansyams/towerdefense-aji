@@ -679,3 +679,20 @@ export const ABILITIES = {
 } as const;
 
 export type AbilityId = keyof typeof ABILITIES;
+
+// ----------------------------------------------------- damage numbers
+export const DAMAGE_TEXT = {
+  /** hard cap on simultaneous numbers */
+  max: 20,
+  life: 0.78,
+  /** initial upward speed, world units/s */
+  rise: 1.5,
+  drag: 2.2,
+  /** hits below this never get a number (poison ticks, chip damage) */
+  minAmount: 1,
+  colors: {
+    hit: '#ffe9a8',
+    splash: '#ffb04a',
+    poison: '#b6ff5c',
+  } as Record<string, string>,
+} as const;
