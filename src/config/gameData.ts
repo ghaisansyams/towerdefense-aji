@@ -182,3 +182,54 @@ export const ECONOMY = {
   /** paid out each time a wave is cleared */
   waveClearBonus: 25,
 } as const;
+
+// ----------------------------------------------------------------- towers
+export type TowerTypeId =
+  | 'arrow'
+  | 'cannon'
+  | 'frost'
+  | 'mortar'
+  | 'poison'
+  | 'support';
+
+/** stats at one upgrade level */
+export interface TowerLevel {
+  /** money spent to REACH this level; level 1's cost is the purchase price */
+  cost: number;
+  damage: number;
+  /** radius in world units */
+  range: number;
+  /** shots per second; 0 for towers that never fire */
+  fireRate: number;
+  projectileSpeed: number;
+  /** frost only: fraction of speed REMOVED (0.4 => enemy moves at 60%) */
+  slowAmount?: number;
+  slowDurationMs?: number;
+  /** mortar only: shell detonates, damaging everything within this radius */
+  aoeRadius?: number;
+  /** mortar only: peak height of the lobbed arc */
+  arcHeight?: number;
+  /** poison only: damage per second, and how long it lasts from the last hit */
+  poisonDps?: number;
+  poisonMs?: number;
+  /** support only: fractional bonuses granted to attack towers in range */
+  buffDamage?: number;
+  buffFireRate?: number;
+}
+
+export interface TowerDef {
+  id: TowerTypeId;
+  name: string;
+  blurb: string;
+  /** 'support' towers never acquire targets or fire */
+  role: 'attack' | 'support';
+  /** body + trim colours for the primitive build */
+  color: string;
+  accent: string;
+  /** projectile tint — deliberately NOT the body colour: a grey cannon shell
+   *  is invisible against a grey Tank. Bright and distinct from every enemy. */
+  projectileColor: string;
+  /** at least one entry, level 1 first. Length is that tower's max level, so
+   *  a type can ship with fewer tiers than another. */
+  levels: TowerLevel[];
+}
