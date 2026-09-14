@@ -586,3 +586,29 @@ export const FX = {
   introLift: 4.5,
   introPull: 3.5,
 } as const;
+
+/** combat tuning: projectiles, hit detection, death animation */
+export const COMBAT = {
+  /** a projectile within this distance of its target counts as a hit */
+  hitRadius: 0.2,
+  projectileRadius: 0.13,
+  /** height projectiles fly at, above the path surface */
+  muzzleY: 0.55,
+  /** seconds the scale-down + fade runs before the corpse is removed */
+  deathDuration: 0.35,
+  /** projectiles are culled after this many seconds (lost target, stray) */
+  maxLifetime: 3,
+  /** armour can never fully absorb a hit: every hit lands at least this much */
+  minDamage: 1,
+} as const;
+
+/** turn an absolute distance-from-spawn back into a path segment + offset */
+export const progressToSeg = (progress: number): { seg: number; distInSeg: number } => {
+  const clamped = Math.max(0, Math.min(progress, PATH.total - 0.001));
+  for (let i = PATH.segs.length - 1; i >= 0; i--) {
+    if (clamped >= PATH.segs[i].start) {
+      return { seg: i, distInSeg: clamped - PATH.segs[i].start };
+    }
+  }
+  return { seg: 0, distInSeg: 0 };
+};
