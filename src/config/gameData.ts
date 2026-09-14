@@ -380,3 +380,47 @@ export interface EnemyDef {
   healAmount?: number;
   healIntervalMs?: number;
 }
+
+export const ENEMIES: Record<EnemyTypeId, EnemyDef> = {
+  grunt: {
+    id: 'grunt', name: 'Grunt', hp: 40, speed: 1.5, reward: 8,
+    color: '#e2402f', shape: 'box', size: 0.42, height: 0.42,
+  },
+  runner: {
+    id: 'runner', name: 'Runner', hp: 20, speed: 3.0, reward: 12,
+    color: '#f5d442', shape: 'cone', size: 0.28, height: 0.58,
+  },
+  tank: {
+    id: 'tank', name: 'Tank', hp: 200, speed: 0.8, reward: 30,
+    color: '#9aa3ad', shape: 'box', size: 0.68, height: 0.68,
+  },
+  armored: {
+    id: 'armored', name: 'Armored', hp: 120, speed: 1.2, reward: 20,
+    color: '#2f4a8c', shape: 'box', size: 0.5, height: 0.5,
+    armor: 15,
+  },
+  splitter: {
+    id: 'splitter', name: 'Splitter', hp: 60, speed: 1.6, reward: 15,
+    color: '#3fbf6a', shape: 'sphere', size: 0.5, height: 0.5,
+    splitInto: { type: 'splitterMini', count: 2 },
+  },
+  splitterMini: {
+    id: 'splitterMini', name: 'Splitter Mini', hp: 20, speed: 2.5, reward: 5,
+    color: '#7fe0a0', shape: 'sphere', size: 0.3, height: 0.3,
+    // no splitInto: minis do not split again
+  },
+  boss: {
+    id: 'boss', name: 'Colossus', hp: 1500, speed: 0.7, reward: 200,
+    color: '#b537e8', shape: 'octa', size: 1.15, height: 1.25,
+    slowImmune: true, livesCost: 5, isBoss: true,
+  },
+  healer: {
+    id: 'healer', name: 'Healer', hp: 90, speed: 1.0, reward: 25,
+    color: '#ee74c8', shape: 'cylinder', size: 0.44, height: 0.62,
+    healRadius: 2.5, healAmount: 12, healIntervalMs: 1500,
+  },
+};
+
+/** the two halves of a split are nudged apart along the path by this much so
+ *  they read as two enemies instead of one; they stay centred on the parent */
+export const SPLIT_SPREAD = 0.24;
