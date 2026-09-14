@@ -28,3 +28,19 @@ canvas {
   display: block;
   touch-action: none;
 }
+
+/* ---------------------------------------------------------- UI overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* the canvas keeps the mouse; panels opt back in */
+}
+
+.panel {
+  position: absolute;
+  pointer-events: auto;
+  background: rgba(16, 22, 27, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+}
