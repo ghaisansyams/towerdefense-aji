@@ -454,3 +454,47 @@ canvas {
   text-transform: uppercase;
   color: #7e91a0;
 }
+
+/* --- targeting mode selector */
+.targeting {
+  margin-bottom: 12px;
+}
+
+.targeting-label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #8fa3b0;
+}
+
+.mode-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+}
+
+.mode {
+  padding: 6px 2px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #9fb2bf;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+
+.mode:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e8eef2;
+}
+
+.mode.active {
+  border-color: rgba(110, 231, 135, 0.5);
+  background: rgba(70, 217, 93, 0.18);
+  color: #8ff0a4;
+}
