@@ -711,3 +711,50 @@ export const PARTICLES = {
   /** scattering cubes when an enemy dies */
   death: { count: 7, speed: 2.5, life: 0.55, size: 0.115, gravity: -5.5, drag: 1.5 },
 } as const;
+
+// ------------------------------------------------------- render / post
+export const RENDER = {
+  /**
+   * Moderate bloom: enough to make emissives read as neon, not a haze.
+   *
+   * MEASURED on an Intel HD 6000 at 50 enemies + 10 towers: bloom off = 60fps,
+   * bloom on = ~40fps, and that gap does NOT move with resolutionScale
+   * (0.5 and 0.25 both read 41) — the cost is the extra render-target passes,
+   * not fill. Particles and damage numbers are free by comparison. So bloom
+   * defaults OFF to hold 60fps, and the HUD exposes it as a choice.
+   */
+  bloom: {
+    intensity: 0.95,
+    threshold: 0.58,
+    smoothing: 0.22,
+    radius: 0.66,
+    resolutionScale: 0.5,
+    levels: 5,
+  },
+  /**
+   * Device-pixel-ratio cap. A retina panel reports 2, which means rendering
+   * 4x the pixels — with a full-screen bloom pass that is the difference
+   * between playable and not on this class of GPU.
+   */
+  maxDpr: 1.5,
+  /** cool haze for depth; near/far are distances from the camera */
+  fog: { color: '#0d1319', near: 22, far: 58 },
+  /** how hot each emissive surface runs (0 = none) */
+  emissive: {
+    towerBarrel: 0.45,
+    frost: 0.8,
+    poison: 0.75,
+    support: 0.6,
+    spawn: 0.7,
+    base: 0.7,
+  },
+  shadow: {
+    mapSize: 1024,
+    /** half-extent of the orthographic shadow camera, in world units */
+    extent: 13,
+    near: 1,
+    far: 48,
+    bias: -0.0016,
+    normalBias: 0.02,
+  },
+} as const;
