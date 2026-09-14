@@ -79,3 +79,20 @@ export const GRID_MAP: TileType[][] = MAP_ROWS.map((row, z) => {
     return tile;
   });
 });
+
+/**
+ * Corner points of the route, in grid coords. Enemies lerp waypoint -> waypoint
+ * (Phase 3). Every segment is axis-aligned and lies on path tiles.
+ */
+export const WAYPOINTS: Array<[number, number]> = [
+  [2, 0],   // spawn, top edge
+  [2, 2],
+  [13, 2],  // ─┐
+  [13, 5],  //  │
+  [2, 5],   // ─┘  four switchbacks in all
+  [2, 8],
+  [13, 8],
+  [13, 11],
+  [2, 11],
+  [2, 15],  // base, bottom edge
+];
