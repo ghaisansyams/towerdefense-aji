@@ -172,3 +172,13 @@ export const TILE_STYLE: Record<TileType, { color: string; height: number }> = {
   occupied: { color: '#3c6f2e', height: 0.3 },   // darker grass under a tower
   scenery: { color: '#4e9a38', height: 0.3 },    // grass holding a rock or tree
 };
+
+// ---------------------------------------------------------------- economy
+export const ECONOMY = {
+  startMoney: 100,
+  startLives: 20,
+  /** selling refunds this fraction of the tower's purchase cost */
+  sellRefund: 0.6,
+  /** paid out each time a wave is cleared */
+  waveClearBonus: 25,
+} as const;
