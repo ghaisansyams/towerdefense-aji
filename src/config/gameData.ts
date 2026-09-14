@@ -301,3 +301,21 @@ export const TARGET_MODES: Array<{ id: TargetMode; label: string; hint: string }
   { id: 'strongest', label: 'Strong', hint: 'Highest current HP' },
   { id: 'closest', label: 'Close', hint: 'Nearest to this tower' },
 ];
+
+/** how many upgrade tiers this tower type ships with */
+export const towerMaxLevel = (type: TowerTypeId): number =>
+  TOWERS[type].levels.length;
+
+/** stats for a tower at a given 1-based level */
+export const towerStats = (type: TowerTypeId, level: number): TowerLevel =>
+  TOWERS[type].levels[
+    Math.min(Math.max(level, 1), towerMaxLevel(type)) - 1
+  ];
+
+/** price to go from `level` to `level + 1`, or null when maxed */
+export const upgradeCost = (type: TowerTypeId, level: number): number | null =>
+  level >= towerMaxLevel(type) ? null : TOWERS[type].levels[level].cost;
+
+/** what a tower costs to buy */
+export const towerBuyCost = (type: TowerTypeId): number =>
+  TOWERS[type].levels[0].cost;
