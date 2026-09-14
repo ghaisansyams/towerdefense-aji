@@ -165,3 +165,89 @@ canvas {
   font-size: 11px;
   color: #7e91a0;
 }
+
+/* --- inspector */
+.inspector {
+  top: 16px;
+  right: 16px;
+  width: 208px;
+  padding: 14px 16px;
+}
+
+.inspector-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.inspector-head .swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.inspector-head h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+  flex: 1;
+}
+
+.close {
+  background: none;
+  border: none;
+  color: #8fa3b0;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.close:hover {
+  color: #e8eef2;
+}
+
+.stats {
+  margin: 0 0 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 10px;
+}
+
+.stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.stats dt {
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #8fa3b0;
+}
+
+.stats dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.sell {
+  width: 100%;
+  padding: 9px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 129, 114, 0.45);
+  background: rgba(255, 129, 114, 0.16);
+  color: #ffb4a9;
+  font: inherit;
+  font-weight: 620;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+
+.sell:hover {
+  background: rgba(255, 129, 114, 0.28);
+}
