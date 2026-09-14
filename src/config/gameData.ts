@@ -633,3 +633,25 @@ export const INVALID_FLASH = {
   ms: 420,
   opacity: 0.55,
 } as const;
+
+// --------------------------------------------------------------- camera
+const PITCH_DEG = 50; // angled top-down
+const CAM_DIST = 23.5;   // scaled with the 16x16 board
+
+export const CAMERA = {
+  fov: 45,
+  near: 0.1,
+  far: 200,
+  position: [
+    GRID_CENTER[0],
+    CAM_DIST * Math.sin((PITCH_DEG * Math.PI) / 180),
+    GRID_CENTER[2] + CAM_DIST * Math.cos((PITCH_DEG * Math.PI) / 180),
+  ] as [number, number, number],
+  target: GRID_CENTER,
+  /** polar angle: 0 = straight overhead, PI/2 = horizon. Clamped so the
+   *  player can never orbit under the map. */
+  minPolarAngle: 0.15,
+  maxPolarAngle: 1.35,
+  minDistance: 8,
+  maxDistance: 42,
+} as const;
