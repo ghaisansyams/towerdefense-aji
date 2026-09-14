@@ -655,3 +655,27 @@ export const CAMERA = {
   minDistance: 8,
   maxDistance: 42,
 } as const;
+
+// ---------------------------------------------------------- abilities
+/** player-activated powers, on their own cooldowns */
+export const ABILITIES = {
+  airstrike: {
+    name: 'Airstrike',
+    blurb: 'Click a tile',
+    cooldownMs: 25000,
+    damage: 120,
+    radius: 2,
+    color: '#ff9d3d',
+  },
+  deepFreeze: {
+    name: 'Deep Freeze',
+    blurb: 'Slows everything',
+    cooldownMs: 30000,
+    /** fraction of speed removed, for durationMs */
+    slowAmount: 0.6,
+    durationMs: 4000,
+    color: '#9beeff',
+  },
+} as const;
+
+export type AbilityId = keyof typeof ABILITIES;
