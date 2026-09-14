@@ -319,3 +319,19 @@ export const upgradeCost = (type: TowerTypeId, level: number): number | null =>
 /** what a tower costs to buy */
 export const towerBuyCost = (type: TowerTypeId): number =>
   TOWERS[type].levels[0].cost;
+
+/** display order in the picker */
+export const TOWER_ORDER: TowerTypeId[] = [
+  'arrow', 'cannon', 'frost', 'mortar', 'poison', 'support',
+];
+
+/** translucent range-ring styling. The edge carries the signal — a soft
+ *  fill alone washes out against the grass, so keep it bright and thick. */
+export const RANGE_RING = {
+  valid: '#2bff6d',
+  invalid: '#ff2f1c',
+  selected: '#ffc32e',
+  fillOpacity: 0.16,
+  edgeOpacity: 0.95,
+  edgeWidth: 0.11,
+} as const;
