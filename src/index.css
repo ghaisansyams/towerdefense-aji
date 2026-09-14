@@ -251,3 +251,40 @@ canvas {
 .sell:hover {
   background: rgba(255, 129, 114, 0.28);
 }
+
+/* --- wave controls in the hud */
+.stat-sub {
+  font-size: 13px;
+  font-weight: 500;
+  color: #8fa3b0;
+}
+
+.start-wave {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  align-self: center;
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(112, 224, 140, 0.5);
+  background: rgba(70, 217, 93, 0.16);
+  color: #8ff0a4;
+  font: inherit;
+  font-weight: 650;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.13s, transform 0.13s;
+}
+
+.start-wave:hover {
+  background: rgba(70, 217, 93, 0.28);
+  transform: translateY(-1px);
+}
+
+.start-sub {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6fbe83;
+}
