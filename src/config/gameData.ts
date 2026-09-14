@@ -96,3 +96,68 @@ export const WAYPOINTS: Array<[number, number]> = [
   [2, 11],
   [2, 15],  // base, bottom edge
 ];
+
+/**
+ * Decorative scenery on the outer border.
+ *
+ * Generated from a FIXED seed rather than Math.random, so the board is
+ * identical on every load and a test can assert against it. The tiles it
+ * claims become 'scenery' — decorative, and not buildable, because a tower
+ * cannot stand inside a boulder.
+ */
+export type DecorKind = 'rock' | 'tree';
+
+export interface DecorItem {
+  x: number;
+  z: number;
+  kind: DecorKind;
+  scale: number;
+  rot: number;
+}
+
+/** mulberry32: tiny deterministic PRNG */
+const seeded = (seed: number) => () => {
+  seed = (seed + 0x6d2b79f5) | 0;
+  let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+};
+
+export const DECOR_SEED = 20260911;
+/** how thick the decorated border band is, in tiles */
+export const DECOR_BAND = 2;
+/** share of eligible border tiles that get scenery */
+export const DECOR_DENSITY = 0.5;
+
+export const DECOR: DecorItem[] = (() => {
+  const rnd = seeded(DECOR_SEED);
+  const out: DecorItem[] = [];
+  for (let z = 0; z < WORLD.gridH; z++) {
+    for (let x = 0; x < WORLD.gridW; x++) {
+      const onBorder =
+        x < DECOR_BAND || x >= WORLD.gridW - DECOR_BAND ||
+        z < DECOR_BAND || z >= WORLD.gridH - DECOR_BAND;
+      if (!onBorder) continue;
+      if (GRID_MAP[z][x] !== 'buildable') continue;   // never touch the route
+      // never claim a tile touching the route either: those are the prime
+      // tower spots and scenery would quietly steal the best real estate
+      let nextToPath = false;
+      for (let dz = -1; dz <= 1 && !nextToPath; dz++) {
+        for (let dx = -1; dx <= 1; dx++) {
+          const n = GRID_MAP[z + dz]?.[x + dx];
+          if (n === 'path' || n === 'spawn' || n === 'base') { nextToPath = true; break; }
+        }
+      }
+      if (nextToPath) continue;
+      if (rnd() > DECOR_DENSITY) continue;
+      const kind: DecorKind = rnd() < 0.45 ? 'rock' : 'tree';
+      out.push({
+        x, z, kind,
+        scale: 0.72 + rnd() * 0.62,
+        rot: rnd() * Math.PI * 2,
+      });
+      GRID_MAP[z][x] = 'scenery';
+    }
+  }
+  return out;
+})();
