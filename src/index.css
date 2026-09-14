@@ -498,3 +498,25 @@ canvas {
   background: rgba(70, 217, 93, 0.18);
   color: #8ff0a4;
 }
+
+/* --- floating damage numbers (pooled spans, positioned by the game loop) */
+.dmg-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.dmg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform, opacity;
+  transform: translate3d(-999px, -999px, 0);
+  font-size: 15px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85), 0 0 8px rgba(0, 0, 0, 0.5);
+  margin: -9px 0 0 -8px;
+}
