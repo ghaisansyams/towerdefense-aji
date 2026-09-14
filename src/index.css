@@ -44,3 +44,38 @@ canvas {
   border-radius: 10px;
   backdrop-filter: blur(6px);
 }
+
+/* --- hud */
+.hud {
+  top: 16px;
+  left: 16px;
+  display: flex;
+  gap: 22px;
+  padding: 12px 18px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-label {
+  font-size: 10px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #8fa3b0;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-value.money {
+  color: #ffd85e;
+}
+.stat-value.lives {
+  color: #ff8172;
+}
