@@ -532,3 +532,57 @@ export const PATH = (() => {
   }
   return { pts, segs, total };
 })();
+
+/**
+ * Purely cosmetic tuning. Nothing here feeds targeting, damage or timing —
+ * changing any of it must not alter how the game plays.
+ */
+export const FX = {
+  /** bright puff at the muzzle when a tower fires; animated by SCALE so the
+   *  one shared material is never mutated per tower */
+  flashMs: 110,
+  flashSize: 0.185,
+  /** warm yellow, not cream: a pale puff is invisible on the cream Arrow cone */
+  flashColor: '#ffd24a',
+  /** height of the puff per tower type: just clear of each silhouette. At the
+   *  projectile spawn height it renders INSIDE the barrel and is invisible. */
+  flashY: {
+    arrow: 1.02, cannon: 0.74, frost: 1.28,
+    mortar: 0.86, poison: 1.12, support: 0,
+  } as Record<string, number>,
+  /** Support aura: always on, deliberately faint so it never competes with
+   *  the range ring of a selected tower */
+  auraColor: '#f0cf6a',
+  auraFill: 0.07,
+  auraEdge: 0.34,
+  /** gold thread drawn from a pylon to each tower it is buffing */
+  linkColor: '#f5d97a',
+  linkRadius: 0.028,
+  linkY: 0.34,
+  /** per-tower-type projectile size multiplier; a mortar shell is heavier */
+  projectileScale: { mortar: 1.7 } as Record<string, number>,
+  /** streak drawn behind a projectile, oriented along its direction */
+  trailLength: 0.5,
+  trailRadius: 0.075,
+  trailOpacity: 0.45,
+  /** hover plate on a buildable tile when nothing is being placed */
+  hoverColor: '#eaf7ff',
+  hoverOpacity: 0.18,
+  /** a selected tower eases up to this scale */
+  selectedScale: 1.1,
+  /** per-level size, indexed by level-1: upgrades read as physically bigger */
+  levelScale: [1, 1.14, 1.3] as number[],
+  /** collar at the base marking an upgraded tower (level 2 and 3) */
+  levelBandColor: ['#c8d2dc', '#ffd24a'] as string[],
+  /** healer's area-heal pulse: expands to the heal radius, then vanishes */
+  healPulseMs: 480,
+  healPulseColor: '#ff8fd8',
+  /** descending opacities the pulse steps through as it expands */
+  healPulseOpacity: [0.75, 0.6, 0.45, 0.3, 0.15] as number[],
+  /** lerp rate per second for the pop and for scale settling */
+  popEase: 14,
+  /** one-shot camera settle on load */
+  introMs: 1100,
+  introLift: 4.5,
+  introPull: 3.5,
+} as const;
