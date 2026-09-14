@@ -233,3 +233,61 @@ export interface TowerDef {
    *  a type can ship with fewer tiers than another. */
   levels: TowerLevel[];
 }
+
+export const TOWERS: Record<TowerTypeId, TowerDef> = {
+  arrow: {
+    id: 'arrow', name: 'Arrow', blurb: 'Cheap all-rounder', role: 'attack',
+    color: '#e2dccb', accent: '#8a6a44', projectileColor: '#fff3b0',
+    levels: [
+      { cost: 50, damage: 10, range: 3.0, fireRate: 1.5, projectileSpeed: 12 },
+      { cost: 60, damage: 18, range: 3.0, fireRate: 2.2, projectileSpeed: 12 },
+      { cost: 120, damage: 32, range: 3.6, fireRate: 2.2, projectileSpeed: 12 },
+    ],
+  },
+  cannon: {
+    id: 'cannon', name: 'Cannon', blurb: 'Slow, heavy damage', role: 'attack',
+    color: '#767c84', accent: '#343940', projectileColor: '#ff9d3d',
+    levels: [
+      { cost: 100, damage: 40, range: 2.5, fireRate: 0.6, projectileSpeed: 7 },
+      { cost: 120, damage: 75, range: 3.0, fireRate: 0.6, projectileSpeed: 7 },
+      { cost: 220, damage: 140, range: 3.0, fireRate: 0.8, projectileSpeed: 7 },
+    ],
+  },
+  frost: {
+    id: 'frost', name: 'Frost', blurb: 'Slows what it hits', role: 'attack',
+    color: '#63c4f2', accent: '#24688f', projectileColor: '#9beeff',
+    levels: [
+      { cost: 75, damage: 5, range: 2.5, fireRate: 1.0, projectileSpeed: 11,
+        slowAmount: 0.4, slowDurationMs: 2000 },
+      { cost: 90, damage: 5, range: 3.0, fireRate: 1.0, projectileSpeed: 11,
+        slowAmount: 0.55, slowDurationMs: 2000 },
+      { cost: 160, damage: 13, range: 3.0, fireRate: 1.0, projectileSpeed: 11,
+        slowAmount: 0.7, slowDurationMs: 2000 },
+    ],
+  },
+  mortar: {
+    id: 'mortar', name: 'Mortar', blurb: 'Lobbed splash damage', role: 'attack',
+    color: '#8f9478', accent: '#3d4235', projectileColor: '#ffb347',
+    levels: [
+      { cost: 120, damage: 35, range: 3.5, fireRate: 0.5, projectileSpeed: 5,
+        aoeRadius: 1.2, arcHeight: 1.7 },
+    ],
+  },
+  poison: {
+    id: 'poison', name: 'Poison', blurb: 'Damage over time', role: 'attack',
+    color: '#6fbf3f', accent: '#2c5c18', projectileColor: '#c2ff5c',
+    // damage 0: all of its damage is the DoT
+    levels: [
+      { cost: 90, damage: 0, range: 2.8, fireRate: 1.0, projectileSpeed: 10,
+        poisonDps: 6, poisonMs: 4000 },
+    ],
+  },
+  support: {
+    id: 'support', name: 'Support', blurb: 'Buffs nearby towers', role: 'support',
+    color: '#e8c25a', accent: '#8a6d20', projectileColor: '#ffe9a8',
+    levels: [
+      { cost: 100, damage: 0, range: 2.0, fireRate: 0, projectileSpeed: 0,
+        buffDamage: 0.25, buffFireRate: 0.15 },
+    ],
+  },
+};
