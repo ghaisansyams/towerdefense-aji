@@ -612,3 +612,24 @@ export const progressToSeg = (progress: number): { seg: number; distInSeg: numbe
   }
   return { seg: 0, distInSeg: 0 };
 };
+
+/** floating health bar above each enemy */
+export const HEALTH_BAR = {
+  width: 0.56,
+  height: 0.07,
+  /** gap between the enemy's top and the bar */
+  yOffset: 0.22,
+  bgColor: '#16101a',
+  /** green -> yellow -> red ramp, walked as health falls. Discrete shared
+   *  materials rather than a per-enemy one, so nothing is ever mutated. */
+  ramp: ['#4ade5b', '#8fe04a', '#d8dc42', '#f5b23c', '#f07838', '#ef4444'],
+  /** a bar only appears once the enemy has actually taken a hit */
+  hideWhenFull: true,
+} as const;
+
+/** red plate that pulses on a tile when placement is refused */
+export const INVALID_FLASH = {
+  color: '#ff2f1c',
+  ms: 420,
+  opacity: 0.55,
+} as const;
