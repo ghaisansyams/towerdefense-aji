@@ -22,3 +22,60 @@ export const GRID_CENTER: [number, number, number] = [
   0,
   ((WORLD.gridH - 1) * WORLD.tileSize) / 2,
 ];
+
+// ----------------------------------------------------------------- tiles
+export type TileType =
+  | 'buildable'
+  | 'path'
+  | 'spawn'
+  | 'base'
+  | 'occupied'
+  /** border tile holding scenery: decorative, and not buildable */
+  | 'scenery';
+
+/**
+ * THE MAP. Row-major: MAP_ROWS[z] is the row at grid-z, char index is grid-x.
+ * Written as string art so the S-path is visible in the source itself.
+ *
+ *   .  buildable (grass)      S  spawn   (top edge, x=1)
+ *   #  path      (dirt road)  B  base    (bottom edge, x=1)
+ *
+ *          x= 0123456789AB
+ */
+const MAP_ROWS = [
+  /* z= 0 */ '..S.............',
+  /* z= 1 */ '..#.............',
+  /* z= 2 */ '..############..',
+  /* z= 3 */ '.............#..',
+  /* z= 4 */ '.............#..',
+  /* z= 5 */ '..############..',
+  /* z= 6 */ '..#.............',
+  /* z= 7 */ '..#.............',
+  /* z= 8 */ '..############..',
+  /* z= 9 */ '.............#..',
+  /* z=10 */ '.............#..',
+  /* z=11 */ '..############..',
+  /* z=12 */ '..#.............',
+  /* z=13 */ '..#.............',
+  /* z=14 */ '..#.............',
+  /* z=15 */ '..B.............',
+];
+
+const CODE_TO_TILE: Record<string, TileType> = {
+  '.': 'buildable',
+  '#': 'path',
+  S: 'spawn',
+  B: 'base',
+};
+
+/** The hardcoded 2D array the game reads: GRID_MAP[z][x] -> TileType */
+export const GRID_MAP: TileType[][] = MAP_ROWS.map((row, z) => {
+  if (row.length !== WORLD.gridW) {
+    throw new Error(`map row ${z} is ${row.length} chars, expected ${WORLD.gridW}`);
+  }
+  return [...row].map((code, x) => {
+    const tile = CODE_TO_TILE[code];
+    if (!tile) throw new Error(`unknown tile code '${code}' at (x=${x}, z=${z})`);
+    return tile;
+  });
+});
