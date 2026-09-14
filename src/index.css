@@ -520,3 +520,25 @@ canvas {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85), 0 0 8px rgba(0, 0, 0, 0.5);
   margin: -9px 0 0 -8px;
 }
+
+/* --- bloom quality toggle */
+.fxtoggle {
+  align-self: center;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: #8fa3b0;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.fxtoggle.on {
+  border-color: rgba(255, 210, 74, 0.5);
+  background: rgba(255, 210, 74, 0.16);
+  color: #ffd24a;
+}
