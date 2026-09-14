@@ -288,3 +288,98 @@ canvas {
   text-transform: uppercase;
   color: #6fbe83;
 }
+
+/* --- win / lose */
+.endscreen {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+  display: grid;
+  place-items: center;
+  background: rgba(8, 11, 14, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+.end-card {
+  min-width: 300px;
+  padding: 28px 32px 24px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(18, 24, 30, 0.97);
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.end-card.won {
+  border-color: rgba(70, 217, 93, 0.5);
+}
+.end-card.lost {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.end-kicker {
+  margin: 0 0 4px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8fa3b0;
+}
+
+.end-card h1 {
+  margin: 0 0 20px;
+  font-size: 30px;
+  font-weight: 680;
+  letter-spacing: -0.01em;
+}
+
+.end-card.won h1 {
+  color: #6ee787;
+}
+.end-card.lost h1 {
+  color: #ff8172;
+}
+
+.end-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0 0 22px;
+}
+
+.end-stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.end-stats dt {
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #8fa3b0;
+}
+
+.end-stats dd {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.restart {
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: #e8eef2;
+  font: inherit;
+  font-weight: 650;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+
+.restart:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
