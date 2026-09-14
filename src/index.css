@@ -593,3 +593,73 @@ canvas {
   background: linear-gradient(90deg, #7b1fa8, #b537e8 55%, #e9a8ff);
   transition: width 0.12s linear;
 }
+
+/* --- ability buttons */
+.abilities {
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+}
+
+.ability {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 108px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: #e8eef2;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.13s, transform 0.13s;
+}
+
+.ability:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 26%, transparent);
+  transform: translateY(-1px);
+}
+
+.ability.armed {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.ability:disabled {
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: #8fa3b0;
+}
+
+/* cooldown sweep: shrinks left-to-right as the ability recharges */
+.ability-sweep {
+  position: absolute;
+  inset: 0;
+  width: var(--pct);
+  background: rgba(255, 255, 255, 0.09);
+  pointer-events: none;
+}
+
+.ability-name {
+  position: relative;
+  font-size: 13px;
+  font-weight: 680;
+}
+
+.ability-sub {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #93a5b2;
+}
+
+.ability.cooling .ability-sub {
+  font-variant-numeric: tabular-nums;
+}
