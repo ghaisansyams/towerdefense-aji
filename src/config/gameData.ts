@@ -504,3 +504,31 @@ export const WAVES: Wave[] = [
  *  they do not exist until something dies. */
 export const waveSize = (i: number) =>
   WAVES[i] ? WAVES[i].groups.reduce((n, g) => n + g.count, 0) : 0;
+
+/** top surface of a path tile: enemies walk on this plane */
+export const PATH_SURFACE_Y = WORLD.tileFloorY + TILE_STYLE.path.height;
+
+/**
+ * Waypoints in world space plus per-segment lengths, precomputed once so the
+ * game loop never recomputes path geometry per frame.
+ */
+export const PATH = (() => {
+  const pts = WAYPOINTS.map(([x, z]) => ({
+    x: x * WORLD.tileSize,
+    z: z * WORLD.tileSize,
+  }));
+  const segs: Array<{
+    ax: number; az: number; bx: number; bz: number; len: number;
+    /** distance from spawn to the start of this segment */
+    start: number;
+  }> = [];
+  let total = 0;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const a = pts[i];
+    const b = pts[i + 1];
+    const len = Math.hypot(b.x - a.x, b.z - a.z);
+    segs.push({ ax: a.x, az: a.z, bx: b.x, bz: b.z, len, start: total });
+    total += len;
+  }
+  return { pts, segs, total };
+})();
