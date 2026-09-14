@@ -335,3 +335,48 @@ export const RANGE_RING = {
   edgeOpacity: 0.95,
   edgeWidth: 0.11,
 } as const;
+
+// ---------------------------------------------------------------- enemies
+export type EnemyTypeId =
+  | 'grunt'
+  | 'runner'
+  | 'tank'
+  | 'armored'
+  | 'splitter'
+  | 'splitterMini'
+  | 'healer'
+  | 'boss';
+
+export interface EnemyDef {
+  id: EnemyTypeId;
+  name: string;
+  hp: number;
+  /** world units per second */
+  speed: number;
+  /** money granted on kill */
+  reward: number;
+  color: string;
+  shape: 'box' | 'cone' | 'sphere' | 'cylinder' | 'octa';
+  /** footprint width and total height, in world units */
+  size: number;
+  height: number;
+
+  /** flat damage reduction applied to EVERY incoming hit, before it lands.
+   *  Many small hits are blunted; one big hit barely notices. */
+  armor?: number;
+
+  /** on death, spawn `count` of `type` at this enemy's position */
+  splitInto?: { type: EnemyTypeId; count: number };
+
+  /** ignores every slow effect. Frost still deals its flat damage. */
+  slowImmune?: boolean;
+  /** lives lost when this reaches the base (default 1) */
+  livesCost?: number;
+  /** draws the big dedicated bar at the top of the screen while alive */
+  isBoss?: boolean;
+
+  /** periodic area heal of OTHER enemies (never itself) */
+  healRadius?: number;
+  healAmount?: number;
+  healIntervalMs?: number;
+}
