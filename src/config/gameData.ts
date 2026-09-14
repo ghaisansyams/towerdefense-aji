@@ -291,3 +291,13 @@ export const TOWERS: Record<TowerTypeId, TowerDef> = {
     ],
   },
 };
+
+/** how a tower picks among the enemies inside its range */
+export type TargetMode = 'first' | 'last' | 'strongest' | 'closest';
+
+export const TARGET_MODES: Array<{ id: TargetMode; label: string; hint: string }> = [
+  { id: 'first', label: 'First', hint: 'Furthest along the path' },
+  { id: 'last', label: 'Last', hint: 'Least far along the path' },
+  { id: 'strongest', label: 'Strong', hint: 'Highest current HP' },
+  { id: 'closest', label: 'Close', hint: 'Nearest to this tower' },
+];
