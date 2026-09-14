@@ -424,3 +424,83 @@ export const ENEMIES: Record<EnemyTypeId, EnemyDef> = {
 /** the two halves of a split are nudged apart along the path by this much so
  *  they read as two enemies instead of one; they stay centred on the parent */
 export const SPLIT_SPREAD = 0.24;
+
+// ----------------------------------------------------------------- waves
+export interface WaveGroup {
+  enemyType: EnemyTypeId;
+  count: number;
+  /** gap between spawns within this group */
+  spawnIntervalMs: number;
+}
+
+export interface Wave {
+  /** groups run in order; the next starts once the previous is fully spawned */
+  groups: WaveGroup[];
+}
+
+/** 8 waves, escalating in count, speed and toughness */
+export const WAVES: Wave[] = [
+  // 1 — a gentle read of the path
+  { groups: [{ enemyType: 'grunt', count: 6, spawnIntervalMs: 900 }] },
+  // 2 — more of the same, tighter
+  { groups: [{ enemyType: 'grunt', count: 10, spawnIntervalMs: 700 }] },
+  // 3 — first runners
+  {
+    groups: [
+      { enemyType: 'grunt', count: 8, spawnIntervalMs: 650 },
+      { enemyType: 'runner', count: 4, spawnIntervalMs: 550 },
+    ],
+  },
+  // 4 — first armour: flat 15 blunts Arrow, Cannon shrugs it off
+  {
+    groups: [
+      { enemyType: 'grunt', count: 12, spawnIntervalMs: 550 },
+      { enemyType: 'runner', count: 6, spawnIntervalMs: 450 },
+      { enemyType: 'armored', count: 3, spawnIntervalMs: 900 },
+    ],
+  },
+  // 5 — first tanks and splitters, then the first Colossus
+  {
+    groups: [
+      { enemyType: 'runner', count: 10, spawnIntervalMs: 400 },
+      { enemyType: 'splitter', count: 3, spawnIntervalMs: 800 },
+      { enemyType: 'tank', count: 2, spawnIntervalMs: 1500 },
+      { enemyType: 'boss', count: 1, spawnIntervalMs: 2000 },
+    ],
+  },
+  // 6 — first healer, escorted
+  {
+    groups: [
+      { enemyType: 'grunt', count: 15, spawnIntervalMs: 420 },
+      { enemyType: 'armored', count: 4, spawnIntervalMs: 700 },
+      { enemyType: 'healer', count: 1, spawnIntervalMs: 1000 },
+      { enemyType: 'tank', count: 3, spawnIntervalMs: 1200 },
+    ],
+  },
+  // 7 — speed, armour and a healer keeping it all alive
+  {
+    groups: [
+      { enemyType: 'runner', count: 12, spawnIntervalMs: 280 },
+      { enemyType: 'splitter', count: 4, spawnIntervalMs: 600 },
+      { enemyType: 'healer', count: 2, spawnIntervalMs: 900 },
+      { enemyType: 'tank', count: 5, spawnIntervalMs: 1000 },
+    ],
+  },
+  // 8 — the wall
+  {
+    groups: [
+      { enemyType: 'grunt', count: 20, spawnIntervalMs: 300 },
+      { enemyType: 'runner', count: 12, spawnIntervalMs: 260 },
+      { enemyType: 'armored', count: 6, spawnIntervalMs: 500 },
+      { enemyType: 'splitter', count: 5, spawnIntervalMs: 550 },
+      { enemyType: 'healer', count: 2, spawnIntervalMs: 800 },
+      { enemyType: 'tank', count: 6, spawnIntervalMs: 900 },
+      { enemyType: 'boss', count: 1, spawnIntervalMs: 2500 },
+    ],
+  },
+];
+
+/** total enemies in a wave, for the HUD. Splitter minis are not counted:
+ *  they do not exist until something dies. */
+export const waveSize = (i: number) =>
+  WAVES[i] ? WAVES[i].groups.reduce((n, g) => n + g.count, 0) : 0;
