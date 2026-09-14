@@ -758,3 +758,22 @@ export const RENDER = {
     normalBias: 0.02,
   },
 } as const;
+
+// -------------------------------------------------------------- lighting
+/**
+ * Warm key against a cool ambient: towers and shells read warm, the ground
+ * and shadowed faces read cool. Ambient is deliberately low so the emissive
+ * surfaces carry the image.
+ */
+export const LIGHTING = {
+  ambientColor: '#9dc4e8',
+  ambientIntensity: 0.38,
+  /** cool sky, warm bounce off the grass */
+  hemiSky: '#a8d8ff',
+  hemiGround: '#3c4a2a',
+  hemiIntensity: 0.55,
+  keyColor: '#ffe3b8',
+  keyIntensity: 2.1,
+  /** offset from the grid centre */
+  keyOffset: [9, 15, 7] as [number, number, number],
+} as const;
