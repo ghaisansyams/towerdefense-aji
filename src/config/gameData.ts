@@ -161,3 +161,14 @@ export const DECOR: DecorItem[] = (() => {
   }
   return out;
 })();
+
+/** colour + box height per tile type. Height differences sink the road. */
+export const TILE_STYLE: Record<TileType, { color: string; height: number }> = {
+  // tileFloorY is -0.3, so height 0.3 puts the grass surface exactly at y=0
+  buildable: { color: '#5cae42', height: 0.3 },
+  path: { color: '#c8a063', height: 0.14 },      // dirt, 0.16 below the grass
+  spawn: { color: '#e0392b', height: 0.36 },     // red, raised above the grass
+  base: { color: '#2f86e0', height: 0.36 },      // blue, raised
+  occupied: { color: '#3c6f2e', height: 0.3 },   // darker grass under a tower
+  scenery: { color: '#4e9a38', height: 0.3 },    // grass holding a rock or tree
+};
